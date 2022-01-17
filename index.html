@@ -24,8 +24,23 @@
             aria-label="Generated Password"
           ></textarea>
         </div>
-        <div class="card-footer">
-          <button id="generate" class="btn">Generate Password</button>
+        <div class="card-footer overlay">
+          <button data-passPref-target="passPref" id="generate" class="btn">Generate Password</button>
+          <div class="passPref active" id="passPref">
+            <div class=passPref-header>
+              <div class="title">Please pick your preferences for your Password.</div>
+              <button data-close-button class="close-button">&times;</button>
+            </div>
+            <div class="passPref-body">
+              <ul>
+                <li>Lowercase: <input type="radio" id="lower" name="lowerCase" value="true"/></li>
+                <li>Uppercase:<input type="radio" id="upper" name="upperCase" value="true"/></li>
+                <li>Numbers:<input type="radio" id="number" name="number" value="true"/></li>
+                <li>Symbols:<input type="radio" id="symbols" name="symbols" value="true"/></li>              
+              </ul>
+            </div>
+          </div>
+          <div id="overlay active"></div>
         </div>
       </div>
     </div>
