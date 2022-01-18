@@ -1,7 +1,6 @@
 // Assignment code here
-console.clear();
 
-// ask user which character types to include
+
 
 // user confirms lowercase, uppercase, numeric, and/or special characters
 
@@ -10,7 +9,7 @@ console.clear();
 // a password is generated that matches the selected criteria
 
 // password is displayed in an alert or written to the page
-
+debugger; 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
@@ -18,114 +17,83 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
 
   // display prompt so user can choose how many characters in new password
-var passwordLength = window.prompt("Choose a number between 8 and 128!")
+const passwordLength = window.prompt("Choose a number between 8 and 128!")
 // user inputs password length 8-128
 console.log(passwordLength);
 
 if ( passwordLength < 8 || passwordLength > 128){
   window.alert("Sorry, wrong number. Please try again!");
 }
-debugger;
-const openModalButtons = document.querySelectorAll('[data-modal-target]')
-const closeModalButtons = document.querySelectorAll('[data-close-button]')
-const overlay = document.getElementById('overlay')
+else{
+  function generatePassword(){
+    const pickLowercase = document.getElementById('pickLowercase')
+    const pickUppercase = document.getElementById('pickUppercase')
+    const pickNumbers = document.getElementById('pickNumbers')
+    const pickSymbols = document.getElementById('pickSymbols')
+    const form = document.getElementById('passGenForm')
 
-openModalButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const modal = document.querySelector(button.dataset.modalTarget)
-    openModal(passPref)
-  })
-})
+    const pickLowercase = document.getElementById('pickLowercase')
+    const pickUppercase = document.getElementById('pickUppercase')
+    const pickNumbers = document.getElementById('pickNumbers')
+    const pickSymbols = document.getElementById('pickSymbols')
 
-overlay.addEventListener('click', () => {
-  const modals = document.querySelectorAll('.passPref.active')
-  modals.forEach(modal => {
-    closeModal(modal)
-  })
-})
+    const LOWERCASE_CHAR_CODES = arrayCharacters(97, 122)
+    const UPPERCASE_CHAR_CODES = arrayCharacters(65, 90)
+    const NUMBER_CHAR_CODES = arrayCharacters(48, 57)
+    const SYMBOL_CHAR_CODES = arrayCharacters(33, 47).concat(
+      arrayCharacters(58,64)
+    ).concat(
+      arrayCharacters(91, 96)
+    ).concat(
+      arrayCharacters(123, 126)
+    )
 
-closeModalButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const modal = button.closest('.modal')
-    closeModal(modal)
-  })
-})
+    form.addEventListener('submit', e =>{
+      e.preventDefault()
+      const pickLowercase = pickLowercase.checked
+      const pickUppercase = pickUppercase.checked
+      const pickNumbers = pickNumbers.checked
+      const pickSymbols = pickSymbols.checked
+      const password = generatePassword(pickLowercase, pickUppercase, pickNumbers, pickSymbols)
+      passwordDisplay.innerText = password
+    })
 
-function openModal(modal) {
-  if (modal == null) return 
-  modal.classList.add('active')
-  overlay.classList.add('active')
+    function generatePassword(passwordLength, pickUppercase, pickNumbers, pickSymbols) {
+      let randomChar = LOWERCASE_CHAR_CODES
+      if (includeUppercase) randomChar = randomChar.concat(UPPERCASE_CHAR_CODES)
+      if (includeNumbers) randomChar = randomChar.concat(NUMBERS_CHAR_CODES)
+      if (includeSymbols) randomChar = randomChar.concat(SYMBOLS_CHAR_CODES)
+
+      const passwordRandom = []
+      for (let i = 0; i < passwordLength; i++) {
+        const randomPassword = randomChar[Math.floor(Math.random() * randomChar.length)]
+        passwordRandom.push(String.fromCharCode(randomPassword))
+      }
+      return passwordRandom.join('')
+    }
+
+    function arrayCharacters(low, high){
+      const array = []
+      for (let i = low; i <= high; i++){
+        array.push(i)
+      }
+      return array
+    }
+
+  }
 }
 
-function closeModal(modal) {
-  if (modal == null) return
-  modal.classList.remove('active')
-  overlay.classList.remove('active')
+
+
+
+
+
+  // var password = generatePassword();
+  // var passwordText = document.querySelector("#password");
+
+  // passwordText.value = password;
+
 }
-
-
-// const randomChar = {
-//   lower: getLowerChar,
-//   upper: getUpperChar, 
-//   number: getNumber,
-//   symbol: getSpecialChar
-// }
-
-// function secureMathRandom() {
-//   return window.crypto.getRandomValues(newUint32Array(1))[0] / (Math.pow(2, 32) - 1);
-// }
-
-// const resultEl = document.getElementById('result');
-// const lengthEl = document.getElementById('length');
-// const upperCharEl = document.getElementById('upperChar');
-// const lowerCharEl = document.getElementById('lowerChar');
-// const specialCharEl = document.getElementById('specialChar');
-// const numbersEl = document.getElementById('numbers');
-
-// while(i = 0, i < passwordLength, i++ );{
-//   function getLowerChar() {
-//     return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
-//   }
-
-//   function getUpperChar() {
-//     return String.fromCharCode(Math.floor(Math.random() *26) +65);
-//   }
-
-//   function getNumber() {
-//     return String.fromCharCode(Math.floor(Math.random() *10) + 48);
-//   }
-
-//   function getSpecialChar() {
-//     const symbols = '!@#$%^&*(){}[]=<>/,.';
-//     return symbols[Math.floor(Math.random() * symbols.length)];
-//   }
-
-//   console.log(getLowerChar);
-//   console.log(getUpperChar);
-//   console.log(getNumber);
-//   console.log(getSpecialChar);
-
-//   const randomChar = {
-//     lower: getLowerChar,
-//     upper: getUpperChar,
-//     number: getNumber,
-//     symbol: getSpecialChar
-//   }; 
-
-
-
-
-
-  
-};
-
-
-//   var password = generatePassword();
-//   var passwordText = document.querySelector("#password");
-
-//   passwordText.value = password;
-
-// }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);

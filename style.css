@@ -98,11 +98,11 @@ button[disabled] {
 }
 
 .passPref{
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  transition: 200ms ease-in-out;
+  /* position: fixed; */
+  /* top: 50%;
+  left: 50%; */
+  /* transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out; */
   background-color: white;
   padding: 3rem;
   border-radius: 1rem;
@@ -131,7 +131,7 @@ label {
   font-weight: bold;
 }
 
-#overlay {
+/* #overlay {
   position: fixed;
   opacity: 0;
   transition: 200ms ease-in-out;
@@ -141,12 +141,12 @@ label {
   bottom: 0;
   background-color: rgba(0,0,0, 0.5);
   pointer-events: none;
-}
+} */
 
-#overlay.active {
+/* #overlay.active {
   opacity: 1;
   pointer-events: all;
-}
+} */
 
 #password {
   -webkit-appearance: none;
