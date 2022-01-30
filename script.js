@@ -2,98 +2,92 @@
 
 
 
-// user confirms lowercase, uppercase, numeric, and/or special characters
 
-// validate user input and one character type should be selected
+
+
 
 // a password is generated that matches the selected criteria
 
 // password is displayed in an alert or written to the page
-debugger; 
-// Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
+// Get references
+const generateBtn = document.querySelector("#generate")
+const confirmBtn = document.querySelector('#confirm')
+const pickLowercase = document.getElementById('#pickLowercase')
+const pickUppercase = document.getElementById('#pickUppercase')
+const pickNumbers = document.getElementById('#pickNumbers')
+const pickSymbols = document.getElementById('#pickSymbols')
+const passPref = document.getElementById('passPref')
+const password = document.getElementById('password')
 
-// Write password to the #password input
-function writePassword() {
+let checked = (pickLowercase || pickUppercase || pickNumbers || pickSymbols === true);
 
-  // display prompt so user can choose how many characters in new password
-const passwordLength = window.prompt("Choose a number between 8 and 128!")
-// user inputs password length 8-128
-console.log(passwordLength);
+// validate user input and one character type should be selected
 
-if ( passwordLength < 8 || passwordLength > 128){
-  window.alert("Sorry, wrong number. Please try again!");
+
+function passLength() {
+  
+  const passwordLength = window.prompt("Choose a number between 8 and 128!");
+
+  if (passwordLength >= 8 && passwordLength <= 128){
+  // shows user password criteria selection
+  passPref.classList.add('show');
+  console.log(passwordLength);
+  return passwordLength;
+}else {
+  window.alert("Sorry that's not a number between 8 and 128. Try again!");
 }
-else{
-  function generatePassword(){
-    const pickLowercase = document.getElementById('pickLowercase')
-    const pickUppercase = document.getElementById('pickUppercase')
-    const pickNumbers = document.getElementById('pickNumbers')
-    const pickSymbols = document.getElementById('pickSymbols')
-    const form = document.getElementById('passGenForm')
 
-    const pickLowercase = document.getElementById('pickLowercase')
-    const pickUppercase = document.getElementById('pickUppercase')
-    const pickNumbers = document.getElementById('pickNumbers')
-    const pickSymbols = document.getElementById('pickSymbols')
+// user confirms lowercase, uppercase, numeric, and/or special characters
+confirmBtn.addEventListener('click', generatePassword);
 
-    const LOWERCASE_CHAR_CODES = arrayCharacters(97, 122)
-    const UPPERCASE_CHAR_CODES = arrayCharacters(65, 90)
-    const NUMBER_CHAR_CODES = arrayCharacters(48, 57)
-    const SYMBOL_CHAR_CODES = arrayCharacters(33, 47).concat(
-      arrayCharacters(58,64)
-    ).concat(
-      arrayCharacters(91, 96)
-    ).concat(
-      arrayCharacters(123, 126)
-    )
+function generatePassword() {
+  
+  function checked(){
+    let useLowercase = pickLowercase.checked;
+    let useUppercase = pickUppercase.checked;
+    let useNumbers = pickNumbers.checked;
+    let useSymbols = pickSymbols.checked;
+  }
+  // check if one criteria has been selected if/else
 
-    form.addEventListener('submit', e =>{
-      e.preventDefault()
-      const pickLowercase = pickLowercase.checked
-      const pickUppercase = pickUppercase.checked
-      const pickNumbers = pickNumbers.checked
-      const pickSymbols = pickSymbols.checked
-      const password = generatePassword(pickLowercase, pickUppercase, pickNumbers, pickSymbols)
-      passwordDisplay.innerText = password
-    })
+  if (useLowercase || useUppercase || useNumbers || useSymbols == false){
+    window.alert("Please pick at least one option!");
+  }
+  else{
+    function writePassword(){
+      const useLowercase = arrayCharacters(97, 122)
+      const useUppercase = arrayCharacters(65, 90)
+      const useNumbers = arrayCharacters(48, 57)
+      const useSymbols = arrayCharacters(33, 47).concat(
+        arrayCharacters(58,64)
+      ).concat(
+        arrayCharacters(91, 96)
+      ).concat(
+        arrayCharacters(123, 126)
+      )
+      }
 
-    function generatePassword(passwordLength, pickUppercase, pickNumbers, pickSymbols) {
-      let randomChar = LOWERCASE_CHAR_CODES
-      if (includeUppercase) randomChar = randomChar.concat(UPPERCASE_CHAR_CODES)
-      if (includeNumbers) randomChar = randomChar.concat(NUMBERS_CHAR_CODES)
-      if (includeSymbols) randomChar = randomChar.concat(SYMBOLS_CHAR_CODES)
+      function arrayCharacters(low, high){
+        const array = [useLowercase, useUppercase, useNumbers, useSymbols]
+        for (let i = low; i <= high; i++){
+          array.push(i)
+        }
+        return array;
+      }
+    }
 
-      const passwordRandom = []
-      for (let i = 0; i < passwordLength; i++) {
-        const randomPassword = randomChar[Math.floor(Math.random() * randomChar.length)]
-        passwordRandom.push(String.fromCharCode(randomPassword))
+    for (let i = 0; i < passwordLength; i++) {
+      const passwordRandom = writePassword[Math.floor(Math.random() * passwordLength.length)]
+      passwordRandom.push(String.fromCharCode(passwordRandom))
       }
       return passwordRandom.join('')
-    }
-
-    function arrayCharacters(low, high){
-      const array = []
-      for (let i = low; i <= high; i++){
-        array.push(i)
       }
-      return array
+      const password = passwordRandom.innerHTML;
+      password.value = passwordRandom.innerText;
     }
-
-  }
-}
-
-
-
-
-
-
-  // var password = generatePassword();
-  // var passwordText = document.querySelector("#password");
-
-  // passwordText.value = password;
-
-}
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+    passPref.remove('show');
+  checked();
+  writePassword();
+  
+  };
+generateBtn.addEventListener('click', passLength);

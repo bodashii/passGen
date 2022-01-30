@@ -25,14 +25,17 @@
           ></textarea>
         </div>
         <div class="card-footer">
-          <button data-passPref-target="#passPref" class="btn">Generate Password</button>
+          <!-- open modal -->
+          <button  id="generate" class="btn">Generate Password</button>
+
+          <!-- start modal -->
           <div class="passPref" id="passPref">
             <div class=passPref-header>
               <div class="title">Please pick which characters to include: </div>
             </div>
             <form>
               <label for="pickLowercase">Lowercase</label>
-              <input type="checkbox" id="pickUppercase">
+              <input type="checkbox" id="pickLowercase">
 
               <label for="pickUppercase">Uppercase</label>
               <input type="checkbox" id="pickUppercase">
@@ -43,12 +46,10 @@
               <label for="pickSymbols">Symbols</label>
               <input type="checkbox" id="pickSymbols">
 
-              <button type="submit" id="generate" class="btn">Submit</button>
-            </form>            
-              </ul>
-            </div>
+              <button type="submit" id="confirm" class="btn">Submit</button>
+            </form>  
           </div>
-          <div id="overlay"></div>
+          <!-- end modal -->
         </div>
       </div>
     </div>
